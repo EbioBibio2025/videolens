@@ -1,0 +1,6 @@
+{
+  "name": "ویدئولنز",
+  "description": "جستجوی معنایی چندرسانه‌ای آفلاین (ویدئو، صوت، اسناد و تصاویر) با بردارهای هوش مصنوعی محلی",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

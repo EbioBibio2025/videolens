@@ -1,11 +1,72 @@
-<div align="center">
+# VideoLens (ویدئولنز)
+## جستجوی معنایی چندرسانه‌ای آفلاین برای اندروید
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+**ویدئولنز (VideoLens)** یک اپلیکیشن کاملاً بومی (Native Android) مبتنی بر **کاتلین (Kotlin)** و **Jetpack Compose** است که به کاربران اجازه می‌دهد در میان ویدئوها، فایل‌های صوتی، اسناد متنی (PDF) و تصاویر محلی گوشی خود با استفاده از هوش مصنوعی و بردارهای معنایی مدل **EmbeddingGemma 2** جستجو کنند.
 
-  <h1>Built with AI Studio</h2>
+تمام مراحل استخراج، ذخیره‌سازی بردارها و محاسبات شباهت کسینوسی به صورت **۱۰۰٪ محلی و آفلاین** روی دستگاه انجام می‌شود و به هیچ سرور خارجی، Python یا Flask وابستگی ندارد.
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+---
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## ویژگی‌های کلیدی
 
-</div>
+1. **کتابخانه رسانه چندحالته (Home & Media Library):**
+   - پیش‌نمایش ویدئوها، فایل‌های صوتی، اسناد و تصاویر
+   - انتخاب فایل‌های واقعی از طریق Storage Access Framework (SAF)
+   - بارگذاری مجموعه داده‌های آزمایشی فاز ۱ جهت ارزیابی اولیه
+
+2. **جستجوی معنایی چندحالته (Multimodal Semantic Search):**
+   - فیلتر نوع رسانه: همه، ویدئو، صوت، تصویر، اسناد
+   - تنظیم آستانه شباهت کسینوسی (Similarity Threshold Slider)
+   - انتخاب پیشوند تسک مدل (مانند `task: search_query` و `retrieval.query`)
+
+3. **نتایج جستجو با درصد تطابق (Search Results with Similarity Scores):**
+   - نمایش کارت‌های تفصیلی به همراه نشانگر رنگی درصد شباهت
+   - پرش مستقیم به لحظه زمانی در ویدئو یا شماره صفحه در سند
+
+4. **لحظات ویدئو با برچسب زمانی (Video Moments with Timestamps):**
+   - نمونه‌برداری زمانی از فریم‌های ویدئو
+   - نوار پیشرفت زمانی (Timeline Scrubber)
+   - پخش و پرش به ثانیه دقیق مفهوم مورد نظر در ویدئو
+
+5. **جستجوی صوت و پادکست‌ها (Audio Search):**
+   - قطعه‌بندی صوتی مونو ۱۶ کیلوهرتز (16kHz Mono Chunks)
+   - نمایشگر سیگنال و شکل موج صوتی (Waveform)
+   - کشف لحظات گفتاری بر اساس مفهوم کلمات
+
+6. **جستجوی اسناد و PDF (Document & PDF Search):**
+   - ایندکس پاراگراف‌ها و صفحات کتاب‌ها و مقالات
+   - نمایش پیشوند `task: search_document`
+
+7. **دسته‌بندی موضوعی هوشمند (Topic-Based Clustering):**
+   - خوشه‌بندی رسانه‌ها بر اساس بردارها (فناوری و هوش مصنوعی، طبیعت و سفر، آموزش، جلسات)
+
+8. **مدیریت صف ایندکس (Indexing Queue & Controls):**
+   - نوار وضعیت و درصد پیشرفت استخراج
+   - قابلیت توقف موقت (Pause)، ادامه (Resume)، لغو (Cancel) و تلاش مجدد (Retry)
+
+9. **وضعیت مدل و اتصال MediaPipe (Model Installation & Runtime Status):**
+   - تفکیک شفاف بین فاز ۱ (شبیه‌ساز محلی) و فاز ۲ (MediaPipe Universal Embedder رسمی)
+   - گزارش دقیق وضعیت وجود فایل‌های وزن مدل (`embeddinggemma-2b-it-cpu.tflite` یا `.task`)
+   - راهنمای مرحله به مرحله نصب آفلاین وزن‌های مدل
+
+10. **تنظیمات و عیب‌یابی آفلاین (Offline Diagnostics & Settings):**
+    - بنچمارک سرعت ضرب داخلی و فاصله کسینوسی ۱,۰۰۰ بردار روی پردازنده گوشی
+    - پاک‌سازی امن پایگاه داده (بدون حذف فایل‌های اصلی کاربر)
+
+---
+
+## معماری و ساختار فنی
+
+- **زبان:** Kotlin
+- **رابط کاربری:** Jetpack Compose + Material 3 (با پشتیبانی کامل RTL و فونت فارسی وزیرمتن)
+- **پایگاه داده محلی:** Room Database (SQLite) با ایندکس‌های ForeignKey
+- **بردارها:** L2-Normalized 256-Dim Float Arrays با مقایسه Dot Product Cosine Similarity
+- **معماری:** Clean MVVM با StateFlow و Coroutines
+- **انتزاع مدل:** اینترفیس `MultimodalEmbeddingEngine` با پیاده‌سازی‌های `MockMultimodalEmbeddingEngine` (فاز ۱) و `MediaPipeEmbeddingEngine` (فاز ۲)
+
+---
+
+## نحوه اجرای فاز ۲ و بارگذاری مدل EmbeddingGemma 2
+
+1. فایل مدل `embeddinggemma-2b-it-cpu.tflite` یا مدل Task مربوط به MediaPipe Universal Embedder را در پوشه `Download` حافظه داخلی قرار دهید.
+2. در تب **موتور مدل**، کلید سوئیچ را از حالت شبیه‌ساز خارج کرده و دکمه **بررسی مجدد وجود فایل مدل** را لمس کنید.

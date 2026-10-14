@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">ویدئولنز</string>
+    <string name="app_tagline">جستجوی معنایی چندرسانه‌ای آفلاین</string>
+    <string name="home_title">کتابخانه رسانه</string>
+    <string name="search_title">جستجوی معنایی</string>
+    <string name="results_title">نتایج جستجو</string>
+    <string name="video_moments_title">لحظات ویدئو</string>
+    <string name="audio_search_title">جستجوی صوتی</string>
+    <string name="document_search_title">جستجوی اسناد</string>
+    <string name="topics_title">دسته‌بندی موضوعی</string>
+    <string name="indexing_title">صف ایندکس</string>
+    <string name="model_status_title">وضعیت مدل</string>
+    <string name="settings_title">تنظیمات و عیب‌یابی</string>
+    
+    <string name="action_search">جستجو</string>
+    <string name="action_add_media">افزودن رسانه</string>
+    <string name="action_load_samples">بارگذاری داده‌های آزمایشی فاز ۱</string>
+    <string name="action_clear_all">پاک‌سازی کتابخانه</string>
+    <string name="action_pause">توقف موقت</string>
+    <string name="action_resume">ادامه ایندکس</string>
+    <string name="action_retry">تلاش مجدد</string>
+    <string name="action_play_moment">پخش از این لحظه</string>
+    <string name="action_view_details">مشاهده جزئیات</string>
+    
+    <string name="filter_all">همه</string>
+    <string name="filter_video">ویدئوها</string>
+    <string name="filter_audio">صداها</string>
+    <string name="filter_image">تصاویر</string>
+    <string name="filter_document">اسناد و PDF</string>
+    
+    <string name="status_completed">تکمیل شده</string>
+    <string name="status_extracting">در حال استخراج فریم‌ها / قطعات</string>
+    <string name="status_embedding">در حال تولید بردارها</string>
+    <string name="status_paused">متوقف شده</string>
+    <string name="status_failed">خطا در ایندکس</string>
+    <string name="status_idle">در انتظار پردازش</string>
+    
+    <string name="search_hint">جستجو در گفتار، تصاویر، متون و فریم‌های ویدئو...</string>
+    <string name="similarity_score_format">تطابق معنایی: %d٪</string>
+    <string name="model_phase1_notice">فاز ۱: موتور در حالت داده‌های آزمایشی قرار دارد. زیرساخت مدل رسمی MediaPipe آماده اتصال است.</string>
+    <string name="offline_guarantee">۱۰۰٪ آفلاین — بدون ارسال داده به اینترنت</string>
+</resources>
