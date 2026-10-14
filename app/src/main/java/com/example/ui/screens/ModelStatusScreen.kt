@@ -217,13 +217,13 @@ fun ModelStatusScreen(
 
                     Spacer(modifier = Modifier.height(10.dp))
 
-                    SpecRow(title = "موتور اصلی:", value = "Google MediaPipe Universal Embedder / LiteRT-LM")
-                    SpecRow(title = "مدل پیش‌فرض:", value = "EmbeddingGemma 2 (2B Parameters)")
-                    SpecRow(title = "بعد بردار:", value = "256 بعد (با پشتیبانی کاهش بعد Matryoshka)")
-                    SpecRow(title = "پیشوند جستجو:", value = "task: search_query | query:")
-                    SpecRow(title = "پیشوند اسناد:", value = "task: search_document | doc:")
-                    SpecRow(title = "فضای ورودی صدا:", value = "مونو، نرخ نمونه‌برداری ۱۶ کیلوهرتز (16kHz PCM)")
-                    SpecRow(title = "استخراج ویدیو:", value = "نمونه‌برداری فریم‌ها در فواصل قابل تنظیم (Frame-based)")
+                    SpecRow(title = "موتور اصلی:", value = "Google MediaPipe Universal Embedder (tasks-retrieval 1.1.1)")
+                    SpecRow(title = "مدل چندحالته:", value = "EmbeddingGemma 2 (Text + Vision 440M)")
+                    SpecRow(title = "نام فایل مدل:", value = "embeddinggemma-2-text-vision-440m.litertlm")
+                    SpecRow(title = "فضای برداری:", value = "۷۶۸ بعد اصلی (کاهش به ۲۵۶ با Matryoshka MRL)")
+                    SpecRow(title = "پیشوند جستجوی متن:", value = "task: search_query | query:")
+                    SpecRow(title = "پیشوند ثبت سند/فریم:", value = "task: search_document | doc:")
+                    SpecRow(title = "حالت تصویری:", value = "پردازش MPImage از Bitmap به صورت آفلاین")
                 }
             }
         }
@@ -256,8 +256,8 @@ fun ModelStatusScreen(
                     Spacer(modifier = Modifier.height(10.dp))
 
                     Text(
-                        text = "۱. فایل باینری مدل (با پسوند .tflite یا .task) به دلیل حجم بالا در بسته اولیه APK قرار نمی‌گیرد.\n" +
-                                "۲. جهت اجرای آفلاین، فایل embeddinggemma-2b-it-cpu.tflite را به پوشه Download گوشی منتقل کنید.\n" +
+                        text = "۱. فایل باینری مدل (embeddinggemma-2-text-vision-440m.litertlm) با حجم تقریبی ۳۶۹ مگابایت جهت اجرای کاملاً آفلاین در حافظه دستگاه قرار می‌گیرد.\n" +
+                                "۲. می‌توانید فایل را در پوشه Download یا پوشه اختصاصی files/models نرم‌افزار قرار دهید.\n" +
                                 "۳. سپس مسیر آن را در فیلد زیر ثبت و دکمه بررسی وضعیت را لمس نمایید.",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,

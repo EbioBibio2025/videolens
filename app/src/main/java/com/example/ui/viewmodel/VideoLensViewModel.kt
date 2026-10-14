@@ -8,6 +8,7 @@ import com.example.data.db.entity.MediaItemEntity
 import com.example.data.db.entity.MediaSegmentEntity
 import com.example.data.db.entity.ModelConfigEntity
 import com.example.data.repository.MediaRepository
+import com.example.domain.engine.EngineInitResult
 import com.example.domain.engine.EngineStatus
 import com.example.domain.engine.MediaPipeEmbeddingEngine
 import com.example.domain.engine.MockMultimodalEmbeddingEngine
@@ -49,7 +50,7 @@ class VideoLensViewModel(application: Application) : AndroidViewModel(applicatio
 
     private val database = AppDatabase.getInstance(application)
     private var mockEngine = MockMultimodalEmbeddingEngine(dimension = 256)
-    private var mediaPipeEngine = MediaPipeEmbeddingEngine(dimension = 256)
+    private var mediaPipeEngine = MediaPipeEmbeddingEngine(application, dimension = 256)
     private var currentEngine: MultimodalEmbeddingEngine = mockEngine
 
     val repository = MediaRepository(database, currentEngine)
@@ -234,15 +235,17 @@ class VideoLensViewModel(application: Application) : AndroidViewModel(applicatio
     fun switchEngineMode(useMock: Boolean) {
         viewModelScope.launch {
             currentEngine = if (useMock) mockEngine else mediaPipeEngine
+            val initResult = currentEngine.initialize()
             refreshEngineStatus()
+            val statusMsg = when (initResult) {
+                is EngineInitResult.Success -> initResult.info
+                is EngineInitResult.MissingModelFile -> initResult.details
+                is EngineInitResult.Failed -> initResult.error
+            }
             repository.upsertModelConfig(
                 ModelConfigEntity(
                     isMockMode = useMock,
-                    statusMessage = if (useMock) {
-                        "فاز ۱: موتور آزمایشی شبیه‌سازی فعال است."
-                    } else {
-                        "موتور رسمی MediaPipe در انتظار فایل مدل روی حافظه است."
-                    }
+                    statusMessage = statusMsg
                 )
             )
         }
